@@ -1,22 +1,24 @@
 ## tbProjects
-|	Column	|	Type	|	Size	|	Description	|
-|---------------|--------------	|---------------|-----------------------|
-|**pid**	|	int	|	4	|	ИД P(roject)ID	|
-|	title	|	nvarchar	|	200	|	Название проекта	|
-|	cipher	|	nchar	|	8	|	Шифр проекта 4-х значный, пример '0596'	|
-|	has_budget	|	smallint	|	2	|	Наличие согласованного бюджета=1	|
-|	start	|	datetime	|	8	|	Дата начала работ	|
-|	finish	|	datetime	|	8	|	Дата окончания работ	|
-|	status_id	|	int	|	4	|	НЕ ИСПОЛЬЗУЕТСЯ	|
-|	comment	|	nvarchar	|	200	|	Комментарий	|
-|	ManagerEid	|	EmployeeID	|	20	|	EID менеджера проекта	|
-|	ChiefEid	|	EmployeeID	|	20	|	EID руководителя проекта	|
-|	displayname	|	nvarchar	|	200	|	ПРАКТИЧЕСКИ НЕ ИСПОЛЬЗУЕТСЯ Синоним имени для отображения в отчётах	|
-|	class	|	int	|	4	|	Аналитическая группа проекта	|
-|	ExcelContractCard	|	nvarchar	|	800	|	имя файла карточки договора в формате N:\dddd\dddd\projects.xlsx!Лист	|
+Поля, которые должын возвращаться
+|	Column	        |	Type	|	Size	|	Description	|
+|---------------        |--------------	|---------------|-----------------------|
+|       **pid**         |int	        |	4	| первичный ключ P(roject)ID	|
+|	title           |nvarchar	|	200	|	Название проекта	|
+|	cipher          |nchar	        |	8	|	Шифр проекта 4-х значный, пример '0596'	|
+|	has_budget	|smallint	|	2	|	Наличие согласованного бюджета=1	|
+|	start           |datetime	|	8	|	Дата начала работ	|
+|	finish          |datetime	|	8	|	Дата окончания работ	|
+|	status_id	|int	        |	4	|	Код статуса см. [tbProjectStatus]	|
+|	ManagerEid	|EmployeeID	|	20	|	EID менеджера проекта	|
+|	ChiefEid	|EmployeeID	|	20	|	EID руководителя проекта	|
+|	class	        |int            |	4	|	Аналитическая группа проекта см. SELECT * FROM [tAnalytics] WHERE CLASS='PROJECTS'|
+
+|	Column	        |	Type	|	Size	|	Description	|
+|---------------        |--------------	|---------------|-----------------------|
 |	curator_id	|	int	|	4	|	SID куратора проекта	|
 |	beneficiary	|	nvarchar	|	510	|	Название бенефициара проекта строкой	|
-|	ref_key	|	uniqueidentifier	|	16	|	ID проекта в 1С	|
+|	ref_key	        |	uniqueidentifier	|	16	|	ID проекта в 1С	|
+|	comment         |nvarchar	|	200	|	Комментарий	|
 |	NotDisplayedStatus	|	int	|	4	|	Не отображать в списке для статус-отчётов	|
 |	NotSignedContract	|	int	|	4	|	Признак что договор по активному проекту НЕ подписан	|
 |	AgreementNotSigned	|	int	|	4	|	УСТАРЕЛО 	|
@@ -40,7 +42,9 @@
 |	Sector2ID2	|	int	|	4	|	УСТАРЕЛО НОВЫЙ подсектор	|
 |	manager_id	|	int	|	4	|	УСТАРЕЛО ИД менеджера	|
 |	chief_id	|	int	|	4	|	УСТАРЕЛО ИД рукводителя проекта	|
-|	ExcelContractCardModifiedDate	|	datetime	|	8	|	NULL	|
-|	SearchField	|	nvarchar	|	510	|	NULL	|
-|	ExcelBudgetModifiedBy	|	int	|	4	|	NULL	|
-|	ExcelBudgetModifiedDate	|	datetime	|	8	|	NULL	|
+|	ExcelContractCardModifiedDate	|	datetime	|	8	|		|
+|	SearchField	|	nvarchar	|	510	|		|
+|	ExcelBudgetModifiedBy	|	int	|	4	|		|
+|	ExcelBudgetModifiedDate	|	datetime	|	8	|		|
+|	ExcelContractCard	|	nvarchar	|	800	|	имя файла карточки договора в формате N:\dddd\dddd\projects.xlsx!Лист	|
+|	displayname	|nvarchar	|	200	|	ПРАКТИЧЕСКИ НЕ ИСПОЛЬЗУЕТСЯ Синоним имени для отображения в отчётах	|
