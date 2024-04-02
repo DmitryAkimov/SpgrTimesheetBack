@@ -1,7 +1,7 @@
 ## tbProjects
 |	Column	|	Type	|	Size	|	Description	|
 |---------------|--------------	|---------------|-----------------------|
-|	pid	|	int	|	4	|	ИД P(roject)ID	|
+|**pid**	|	int	|	4	|	ИД P(roject)ID	|
 |	title	|	nvarchar	|	200	|	Название проекта	|
 |	cipher	|	nchar	|	8	|	Шифр проекта 4-х значный, пример '0596'	|
 |	has_budget	|	smallint	|	2	|	Наличие согласованного бюджета=1	|
