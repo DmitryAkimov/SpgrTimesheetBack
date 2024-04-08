@@ -19,5 +19,5 @@ Back для системы сбора загрузки v3.0
 * /project/{pid} - информация по одному проекту
 * /project/{id}/stage - все стадии конкретного проекта
 
-* /timesheet/user/{employeeid}/{start}/{finish} - данные для одного юзера
+* /timesheet/{employeeid}/{start}/{finish} - данные для одного юзера
 * /calendar/{start}/{finish} - даты с учётом праздников от старта до финиша включительно
