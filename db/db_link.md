@@ -1,1 +1,0 @@
-[Ссыдка на слепок базы](https://disk.yandex.ru/d/z7hUL349xQHyCg)
