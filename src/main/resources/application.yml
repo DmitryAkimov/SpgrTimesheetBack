@@ -1,3 +1,14 @@
+server:
+  port: 8081
 spring:
   application:
     name: spgrtimesheetback
+  datasource:
+    url: jdbc:sqlserver://localhost;database=MDM-240401;trustServerCertificate=true
+    username: dev
+    password: s3cret
+  jpa:
+    hibernate:
+      ddl-auto: update
+      
+   
