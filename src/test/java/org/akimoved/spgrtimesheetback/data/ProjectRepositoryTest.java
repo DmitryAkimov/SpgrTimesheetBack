@@ -1,6 +1,8 @@
 package org.akimoved.spgrtimesheetback.data;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.util.Optional;
 
 import org.akimoved.spgrtimesheetback.entity.Project;
@@ -9,6 +11,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+
+import jakarta.persistence.Query;
 
 @DataJpaTest
 @DisplayName("testing ProjectRepository")
@@ -75,9 +79,32 @@ class ProjectRepositoryTest {
 	void givenProjectCreated_whenDelete_thenSuccess() {
 		Project newProject = new Project("Test Project");
 		em.persist(newProject);
+		
 		repo.delete(newProject);
 		assertThat(em.find(Project.class, newProject.getId()))
 			.as("should return no projects")
 			.isNull();
+	}
+	
+	@Test
+	@DisplayName("converting boolean to SQL smallint")
+	void givenProjectWithBudgetCreated_whenFindAndBudgetFieldIsTrue_thenSuccess() {
+		Project projectWithBudget = new Project("Budget");
+		projectWithBudget.setHasBudget(true);
+		em.persist(projectWithBudget);
+		
+		Project projectWithoutBudget = new Project("NoBudget");
+		projectWithoutBudget.setHasBudget(false);
+		em.persist(projectWithoutBudget);
+		
+		Query queryTrue = this.em.getEntityManager()
+				.createNativeQuery(String.format("SELECT has_budget FROM tb_projects WHERE id=%d", projectWithBudget.getId()), Integer.class);
+		Integer sqlTrue = (Integer) queryTrue.getSingleResult();
+		assertEquals(1, sqlTrue, "should convert true to 1");
+		
+		Query queryFalse = this.em.getEntityManager()
+				.createNativeQuery(String.format("SELECT has_budget FROM tb_projects WHERE id=%d", projectWithoutBudget.getId()), Integer.class);
+		Integer sqlFalse = (Integer) queryFalse.getSingleResult();
+		assertEquals(0, sqlFalse, "should convert false to 0");
 	}
 }
