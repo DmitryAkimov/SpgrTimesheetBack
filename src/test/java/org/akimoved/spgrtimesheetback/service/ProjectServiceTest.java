@@ -21,6 +21,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
+@DisplayName("testing ProjectService")
 class ProjectServiceTest {
 
 	@InjectMocks
@@ -58,5 +59,13 @@ class ProjectServiceTest {
 		Optional<Project> retrievedProject = instance.getById(1);
 		assert(retrievedProject.isPresent());
 		verify(projectRepo, times(1)).findById(anyInt());
-		}
+	}
+	
+	@Test
+	@DisplayName("throwing exception when pid is invalid")
+	void whenIdInvalid_throwException() {
+		Exception e = assertThrows(IllegalArgumentException.class, () -> instance.getById(-1),
+				"should throw exception if pid is invalid");
+		assertEquals("PID -1 is invalid", e.getMessage());
+	}
 }

@@ -4,9 +4,6 @@ import java.time.Instant;
 
 import org.akimoved.spgrtimesheetback.data.converter.BooleanShortConverter;
 import org.hibernate.annotations.Nationalized;
-import org.hibernate.type.NumericBooleanConverter;
-
-import jakarta.annotation.Nullable;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
