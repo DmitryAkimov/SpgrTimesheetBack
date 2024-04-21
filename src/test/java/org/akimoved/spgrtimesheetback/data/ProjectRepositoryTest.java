@@ -3,6 +3,7 @@ package org.akimoved.spgrtimesheetback.data;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.akimoved.spgrtimesheetback.entity.Project;
@@ -106,5 +107,19 @@ class ProjectRepositoryTest {
 				.createNativeQuery(String.format("SELECT has_budget FROM tb_projects WHERE id=%d", projectWithoutBudget.getId()), Integer.class);
 		Integer sqlFalse = (Integer) queryFalse.getSingleResult();
 		assertEquals(0, sqlFalse, "should convert false to 0");
+	}
+	
+	@Test
+	@DisplayName("finding all stored projects")
+	void givenProjectsCreated_whenFindAll_thenSuccess() {
+		for (int i = 0; i < 3; i++) {
+			em.persist(new Project("project" + i));
+		}
+		
+		List<Project> retrievedProjects = repo.findAll();
+		assertEquals(3, retrievedProjects.size(), "should find 3 stored projects");
+		for (int j = 0; j < 3; j++) {
+			assertEquals("project" + j, retrievedProjects.get(j).getTitle());
+		}
 	}
 }
