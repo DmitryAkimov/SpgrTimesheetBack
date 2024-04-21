@@ -12,10 +12,12 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.test.context.ActiveProfiles;
 
 import jakarta.persistence.Query;
 
 @DataJpaTest
+@ActiveProfiles(value = "test")
 @DisplayName("testing ProjectRepository")
 class ProjectRepositoryTest {
 
@@ -99,14 +101,14 @@ class ProjectRepositoryTest {
 		em.persist(projectWithoutBudget);
 		
 		Query queryTrue = this.em.getEntityManager()
-				.createNativeQuery(String.format("SELECT has_budget FROM tb_projects WHERE id=%d", projectWithBudget.getId()), Integer.class);
-		Integer sqlTrue = (Integer) queryTrue.getSingleResult();
-		assertEquals(1, sqlTrue, "should convert true to 1");
+				.createNativeQuery(String.format("SELECT has_budget FROM tbProjects WHERE pid=%d", projectWithBudget.getId()), Short.class);
+		Short sqlTrue = (Short) queryTrue.getSingleResult();
+		assertEquals((short) 1, sqlTrue, "should convert TRUE to 1");
 		
 		Query queryFalse = this.em.getEntityManager()
-				.createNativeQuery(String.format("SELECT has_budget FROM tb_projects WHERE id=%d", projectWithoutBudget.getId()), Integer.class);
-		Integer sqlFalse = (Integer) queryFalse.getSingleResult();
-		assertEquals(0, sqlFalse, "should convert false to 0");
+				.createNativeQuery(String.format("SELECT has_budget FROM tbProjects WHERE pid=%d", projectWithoutBudget.getId()), Short.class);
+		Short sqlFalse = (Short) queryFalse.getSingleResult();
+		assertEquals((short) 0, sqlFalse, "should convert FALSE to 0");
 	}
 	
 	@Test
