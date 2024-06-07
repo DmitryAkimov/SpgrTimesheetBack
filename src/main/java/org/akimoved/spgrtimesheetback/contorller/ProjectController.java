@@ -2,12 +2,10 @@ package org.akimoved.spgrtimesheetback.contorller;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 import org.akimoved.spgrtimesheetback.entity.Project;
 import org.akimoved.spgrtimesheetback.service.ProjectService;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,18 +17,19 @@ import org.springframework.web.server.ResponseStatusException;
 				produces = "application/json")
 public class ProjectController {
 
-	private ProjectService projectService;
+	private final ProjectService projectService;
 
 	public ProjectController(ProjectService projectService) {
 		this.projectService = projectService;
 	}
 	
 	@GetMapping("")
-	public List<Project> allProjets() {
+	public List<Project> allProjects() {
 		return projectService.getAll();
 	}
 	
-	@GetMapping("/{pid}")
+	@SuppressWarnings("OptionalGetWithoutIsPresent")
+    @GetMapping("/{pid}")
 	public Project getProjectByPid(@PathVariable("pid") Integer pid) {
 		try {
 			return projectService.getById(pid).get();

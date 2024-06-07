@@ -4,8 +4,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
-import jakarta.annotation.Resource;
-
 @SpringBootApplication
 public class SpgrtimesheetbackApplication extends SpringBootServletInitializer {
 	

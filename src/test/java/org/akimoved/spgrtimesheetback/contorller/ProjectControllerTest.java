@@ -38,7 +38,7 @@ class ProjectControllerTest {
 	@DisplayName("getting all projects in JSON")
 	void givenProjects_whenGetAllProjects_thenReturnJsonArray() throws Exception {
 		Project project = new Project("Test Project");
-		List<Project> list = new ArrayList<Project>();
+		List<Project> list = new ArrayList<>();
 		list.add(project);
 		
 		when(service.getAll()).thenReturn(list);
